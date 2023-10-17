@@ -30,7 +30,7 @@ print(driver.capabilities['browserVersion'])
 driver.maximize_window()
 
 # NVIDIA 로그인 대기 로직 시작 ---------------------------------------------------------------------
-nvidiaUrl = 'https://accounts.shopify.com/lookup?rid=84809cae-ea1a-4c72-8475-bf7561f26877'              #####################################################################################################수정한 부분
+nvidiaUrl = 'https://www.nvidia.com/ko-kr/'              #####################################################################################################수정한 부분
 uploadUrl = 'https://nidvia.co.kr/api/qr/upload'  # Server
 # uploadUrl = 'http://localhost:3000/api/qr/upload'     # TEST Local
 qrImageFileName = 'nvidia_signin_with_qr.png'
@@ -41,7 +41,7 @@ while True:
     driver.implicitly_wait(time_to_wait=5)  # 5초까지 기다려 준다 (파싱되는 시간을 기다려준다)
 
     # 로그인 버튼 찾아 클릭
-    loginLink = driver.find_element(By.ID, 'web_authn_btn_trigger')          #####################################################################################################수정한 부분
+    loginLink = driver.find_element(By.ID, 'nv-login')          #####################################################################################################수정한 부분
     loginLink.click()
 
     # 로그인 페이지 화면 로딩 대기
@@ -51,8 +51,8 @@ while True:
     print(driver.title)  # 현재 웹 페이지 제목 출력
 
     # 보안 장치로 로그인 버튼 찾아 클릭
-    #signInLink = driver.find_element(By.ID, 'signIn_withSecurityDevice_link')      #####################################################################################################수정한 부분
-    #signInLink.click()                                                             #####################################################################################################수정한 부분
+    signInLink = driver.find_element(By.ID, 'signIn_withSecurityDevice_link')      #####################################################################################################수정한 부분
+    signInLink.click()                                                             #####################################################################################################수정한 부분
     
     time.sleep(3)  # 무조건 3초 대기
 
@@ -67,7 +67,7 @@ while True:
     qrLocation = pyautogui.locateOnScreen('qr_sample.png')  # 이미지가 있는 위치를 가져옵니다.
 
     # QR 코드 화면 캡쳐
-    nvidiaQrImage = pyautogui.screenshot(qrImageFileName, region=(1057, 77, 445, 445))
+    nvidiaQrImage = pyautogui.screenshot(qrImageFileName, region=(1061, 78, 439, 441))
 
     # files = open('nvidia_signin_with_qr.png', 'rb')
     qrCaptureImageFile = open(qrImageFileName, 'rb')
