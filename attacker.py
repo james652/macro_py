@@ -32,28 +32,30 @@ def GetQR():
 
     # Nvidia 접속
     driver.get(nvidiaUrl)
-    driver.implicitly_wait(time_to_wait=3)  # 5초까지 기다려 준다 (파싱되는 시간을 기다려준다)
+    driver.implicitly_wait(time_to_wait=1)  # 5초까지 기다려 준다 (파싱되는 시간을 기다려준다)
 
     # 보안 장치로 로그인 버튼 찾아 클릭
     signInLink = driver.find_element(By.ID, 'signIn_withSecurityDevice_link')      #####################################################################################################수정한 부분
     signInLink.click()                                                             #####################################################################################################수정한 부분
-    time.sleep(3)  # 무조건 3초 대기
+    time.sleep(4)  # 무조건 3초 대기
 
     # 마우스 클릭 QR 코드 (다른 휴대전화 또는 테블릿 사용)
     pyautogui.moveTo(1187, 360)  # 버튼 위치로 이동
     pyautogui.click()           # 클릭
-    time.sleep(3)  # 무조건 1초 대기
+    time.sleep(1)  # 무조건 1초 대기
 
     # QR 코드 화면 캡쳐
     # nvidiaQrImage = pyautogui.screenshot(qrImageFileName, region=(1055+12, 82+12, 450-24, 496-24)) # FIDO POPUP With QR
     pyautogui.screenshot(qrImageFileName, region=(1055+86, 82+134, 278, 278)) # Only QR
 
-    time.sleep(20)  # 무조건 60초 대기
+    return (driver, qrImageFileName)
 
-    if driver.title == "로그인 성공":
-        print("개인 정보 취득 성공")
+    # # time.sleep(20)  # 무조건 60초 대기
+    # if driver.title == "로그인 성공":
+    #     print("개인 정보 취득 성공")
+    # # 현재 웹 페이지 제목으로 로그인 되었는지 체크
+    # # 로그인 되었다면 사용자 정보 취득 하고 종료
+    # driver.quit()  # driver 종료
 
-    # 현재 웹 페이지 제목으로 로그인 되었는지 체크
-    # 로그인 되었다면 사용자 정보 취득 하고 종료
-    driver.quit()  # driver 종료
-
+if __name__ == "__main__":
+    GetQR()

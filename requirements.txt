@@ -3,3 +3,4 @@ webdriver-manager
 pyautogui
 pillow
 requests
+flask
